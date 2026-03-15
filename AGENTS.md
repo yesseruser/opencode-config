@@ -1,5 +1,9 @@
 # Global Rules
 
+## Waiting
+
+To wait for a certain time, run `sleep` with the desired time.
+
 ## Interacting with GitHub
 
 All GitHub interaction should be made with the `gh` CLI, such as:
@@ -38,9 +42,9 @@ On GitHub PRs, @coderabbitai will comment with a summary and walkthrough of chan
 Major comments are posted as actual GitHub code review comments, whereas nitpicks and duplicates (that still apply) are posted as conversation comments.
 
 CodeRabbit has a very small rate limit on OSS projects - it will edit the walkthrough comment with a "Rate limit exceeded" warning with a wait time.
-When asked to check for reviews and see this warning, you should sleep for that time, and (since CodeRabbit doesn't auto-review after this time) comment "@coderabbitai review" to request a review.
+When asked to check for reviews and see this warning, you should wait for that time, and (since CodeRabbit doesn't auto-review after this time) comment "@coderabbitai review" to request a review.
 
-This review can take roughly 5 minutes, if you don't see a review now, wait another 3 minutes.
+This review can take roughly 5 minutes, if you don't see a review after that time, wait another 3 minutes.
 
 CodeRabbit will also pause reviews when there are a lot of commits on the branch (indicated with an edit on the walkthrough comment). Comment "@coderabbit continue" and (in a new comment) "@coderabbit review" to request a review.
 
