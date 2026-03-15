@@ -2,6 +2,6 @@
   "$schema": "https://opencode.ai/tui.json",
   "theme": "system",
   "keybinds": {
-    "leader": "space"
+    "leader": "ctrl+space"
   }
 }
