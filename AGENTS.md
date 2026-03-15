@@ -10,3 +10,7 @@ When making git commits, ALWAYS use the `--author` flag:
 ## Pushing to Remote
 
 If a remote exists, always push unless specified otherwise. If the change is non-trivial or makes noticeable changes in the application, create a new branch before committing and open a PR instead of committing directly to main.
+
+## Merging a PR
+
+When merging a PR, switch to the main branch, pull from remote, and unless specified otherwise, delete both the local and remote PR branch.
