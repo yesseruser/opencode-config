@@ -2,7 +2,8 @@
 
 ## Changes
 
-All changes should be commited (see next section)
+All changes should be commited (see next section).
+When switching to another branch that you want to transfer current changes to, prefer git stash over git commit and git cherry-pick.
 
 ## Git Commit Author
 
