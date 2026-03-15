@@ -14,4 +14,4 @@ If a remote exists, always push unless specified otherwise. If the change is non
 
 ## Merging a PR
 
-When merging a PR, switch to the main branch, pull from remote, and unless specified otherwise, delete both the local and remote PR branch.
+When merging a PR, switch to the main branch (if not already on it), pull from remote, and unless specified otherwise, delete both the local and remote PR branch.
