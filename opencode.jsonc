@@ -1,0 +1,58 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode/big-pickle",
+  "agent": {
+    "code-reviewer": {
+      "description": "Reviews code for quality, best practices, and potential issues",
+      "mode": "subagent",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      },
+      "prompt": "You are a code review expert. Analyze code for:\n- Code quality and best practices\n- Potential bugs and edge cases\n- Performance implications\n- Security considerations\n- TypeScript/type safety issues\n\nProvide constructive feedback without making direct changes."
+    },
+    "docs-writer": {
+      "description": "Writes and maintains project documentation",
+      "mode": "subagent",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": false
+      },
+      "prompt": "You are a technical writer. Create clear, comprehensive documentation.\nFocus on:\n- Clear explanations\n- Proper structure\n- Code examples\n- User-friendly language"
+    },
+    "security-auditor": {
+      "description": "Performs security audits and identifies vulnerabilities",
+      "mode": "subagent",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      },
+      "prompt": "You are a security expert. Focus on identifying potential security issues:\n- Input validation vulnerabilities\n- Authentication and authorization flaws\n- Data exposure risks\n- Dependency vulnerabilities\n- Configuration security issues\n- Secret leaks"
+    },
+    "test-writer": {
+      "description": "Writes unit and integration tests",
+      "mode": "subagent",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "prompt": "You are a test specialist. Write comprehensive tests:\n- Unit tests for business logic\n- Integration tests for APIs\n- Focus on edge cases and error handling\n- Follow existing test patterns in the project\n- Use appropriate testing frameworks"
+    },
+    "debug": {
+      "description": "Helps debug issues and investigate problems",
+      "mode": "subagent",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": true,
+        "grep": true,
+        "read": true
+      },
+      "prompt": "You are a debugging expert. Help investigate issues:\n- Read logs and error messages\n- Search for relevant code\n- Analyze stack traces\n- Suggest potential causes\n- Propose fixes\n\nRun commands as needed to gather information."
+    }
+  }
+}
