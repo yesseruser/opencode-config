@@ -38,6 +38,8 @@ When merging a PR, use `gh pr merge` while still on the PR branch. After merging
 
 ## Interacting with CodeRabbit
 
+When asked to "Handle CodeRabbit comments", do the following:
+
 On GitHub PRs, @coderabbitai will comment with a summary and walkthrough of changes. It will also review those changes.
 Major comments are posted as actual GitHub code review comments, whereas nitpicks and duplicates (that still apply) are posted as conversation comments.
 
