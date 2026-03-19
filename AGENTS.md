@@ -19,7 +19,8 @@ All GitHub interaction should be made with the `gh` CLI, such as:
 
 All changes must adhere to a CONTRIBUTING.md file (or similar) if it exists in the project root.
 
-All changes should be commited (see next section).
+All changes must be commited granularly to adhere to git best practices. If a commit can be split, split it.
+
 When switching to another branch that you want to transfer current changes to, prefer git stash over git commit and git cherry-pick.
 
 ## Git Commit Author
