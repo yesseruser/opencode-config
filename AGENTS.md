@@ -28,7 +28,7 @@ When switching to another branch that you want to transfer current changes to, p
 When making git commits, ALWAYS use the `--author` flag:
 
 1. First run: `git config user.email` to get the current e-mail
-2. Add "Co-authored-by: OpenCode <email you just got>" to your commit message.
+2. Add "Co-authored-by: OpenCode <email returned by git config user.email>" to your commit message.
 3. Unless specified otherwise, push changes (check Pushing to Remote section).
 
 ## Pushing to Remote
