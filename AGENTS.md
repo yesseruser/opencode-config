@@ -37,7 +37,7 @@ If a remote exists, always push unless specified otherwise. If the change is non
 
 ## Merging a PR
 
-When merging a PR, use `gh pr merge` while still on the PR branch. After merging, switch to the main branch (if not already on it), pull from remote, and unless specified otherwise, delete both the local and remote PR branch.
+When merging a PR, use `gh pr merge --merge --delete-branch` while still on the PR branch. This will also delete the current branch and check out the merged master branch.
 
 ## Interacting with CodeRabbit
 
