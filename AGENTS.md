@@ -7,6 +7,7 @@ To wait for a certain time, run `sleep` with the desired time.
 ## Interacting with GitHub
 
 All GitHub interaction should be made with the `gh` CLI, such as:
+
 - `gh pr create`
 - `gh pr merge`
 - `gh pr comment`
@@ -17,23 +18,22 @@ All GitHub interaction should be made with the `gh` CLI, such as:
 
 ## Changes
 
-All changes must adhere to a CONTRIBUTING.md file (or similar) if it exists in the project root.
+All changes must adhere to a CONTRIBUTING.md file and AGENTS.md (or similar files) if they exist in the project root.
 
-All changes must be commited granularly to adhere to git best practices. If a commit can be split, split it.
+All changes must be commited granularly to adhere to git best practices. If a commit can be split into smaller chunks that are still meaningful, split it.
 
-When switching to another branch that you want to transfer current changes to, prefer git stash over git commit and git cherry-pick.
+When switching to another branch that you want to transfer current changes to, prefer `git stash` and `git stash pop` over `git commit` and `git cherry-pick`.
 
 ## Git Commit Author
 
-When making git commits, ALWAYS use the `--author` flag:
+When making git commits:
 
-1. First run: `git config user.email` to get the current e-mail
-2. Add "Co-authored-by: OpenCode <email returned by git config user.email>" to your commit message.
-3. Unless specified otherwise, push changes (check Pushing to Remote section).
+1. Add "Co-authored-by: OpenCode <email returned by git config user.email>" to your commit message.
+2. Unless specified otherwise, push changes (check Pushing to Remote section).
 
 ## Pushing to Remote
 
-If a remote exists, always push unless specified otherwise. If the change is non-trivial or makes noticeable changes in the application, create a new branch before committing and open a PR instead of committing directly to main. This does not apply to GitHub workflow changes or configuration-only changes that don't affect the resulting library or application (e.g., AGENTS.md), as the PR is mainly for the automated changelog.
+If a remote exists **AND _NOT_ ON THE MAIN BRANCH**, always push unless specified otherwise. If the change is non-trivial or makes noticeable changes in the application, create a new branch before committing and open a PR instead of committing directly to main. This does not apply to GitHub workflow changes or configuration-only changes that don't affect the resulting library or application (e.g., AGENTS.md), as the PR is mainly for the automated changelog.
 
 ## Merging a PR
 
@@ -43,7 +43,7 @@ When merging a PR, use `gh pr merge --merge --delete-branch` while still on the 
 
 When asked to "Handle CodeRabbit comments", do the following:
 
-On GitHub PRs, @coderabbitai will comment with a summary and walkthrough of changes. It will also review those changes.
+On GitHub PRs, @coderabbitai will comment with a summary and walkthrough of changes. It will also review those changes. This comment takes a while to appear - run `sleep` for a couple minutes.
 Major comments are posted as actual GitHub code review comments, whereas nitpicks and duplicates (that still apply) are posted as conversation comments.
 
 CodeRabbit has a very small rate limit on OSS projects - it will edit the walkthrough comment with a "Rate limit exceeded" warning with a wait time.
@@ -53,5 +53,7 @@ This review can take roughly 5 minutes, if you don't see a review after that tim
 
 CodeRabbit will also pause reviews when there are a lot of commits on the branch (indicated with an edit on the walkthrough comment). Comment "@coderabbit continue" and (in a new comment) "@coderabbit review" to request a review.
 
-If neither edits on the walkthrough comments are applied and the CodeRabbit check shows completed instead of pending, then no more comments are to be made and the review is finished (take this as a "LGTM" message.)
+If neither edits on the walkthrough comments are applied and the CodeRabbit check shows completed instead of pending, **and if the walkthrough comment doesn't show a rate-limit or similar message**, then no more comments are to be made and the review is finished (take this as a "LGTM" message.)
 DO NOT MERGE PR UNTIL I APPROVE.
+
+When polling GitHub comments, always specify a large comment count (1000 or more), if you don't see a CodeRabbit walkthrough comment but you see other comments, you need to increase (if you don't see other comments, wait another 3 minutes)
