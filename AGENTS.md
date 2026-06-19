@@ -28,7 +28,9 @@ When switching to another branch that you want to transfer current changes to, p
 
 When making git commits:
 
-1. Add "Co-authored-by: OpenCode <email returned by git config user.email>" to your commit message.
+0. Check current commit message style with `git log` and adhere to it for the summary;
+   your commit messages should ALWAYS have a highly descriptive description.
+1. Add "Co-authored-by: OpenCode <email returned by `git config user.email`>" to your commit message.
 2. Unless specified otherwise, push changes (check Pushing to Remote section).
 
 ## Pushing to Remote
