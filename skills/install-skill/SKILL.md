@@ -1,6 +1,6 @@
 ---
 name: install-skill
-description: Use when the user wants to install, add, or vendor an opencode skill from a GitHub repo, a git/HTTPS URL, or a local directory — e.g. "install this skill", "add the <name> skill", or a pasted repo link. Installs into ~/.agents/skills or the opencode config repo, asking which when unspecified.
+description: Use when the user wants to install, add, or vendor an opencode skill from a GitHub repo, a git/HTTPS URL, or a local directory — e.g. "install this skill", "add the <name> skill", or a pasted repo link. Installs into ~/.agents/skills, the current repo's .claude/skills, or the opencode config repo, asking which when unspecified.
 ---
 
 # Install Skill
@@ -46,19 +46,24 @@ reason this step exists.
 
 ## Choose the destination
 
-If the user already named a destination, skip straight to
-[Resolve the destination](#resolve-the-destination). Otherwise offer exactly two
-options, in this order:
+If the user already named a destination, skip straight to its section below.
+Otherwise offer the options below, in this order:
 
 1. **`~/.agents/skills`** — opencode auto-loads `~/.agents/skills/*/SKILL.md`
    globally. No git, no rebuild. Not managed by git at all.
 2. **The opencode config repo** — go to
-   [Resolve the destination](#resolve-the-destination).
+   [Resolve the config-repo destination](#resolve-the-config-repo-destination).
+3. **The current repo's `.claude/skills`** — go to
+   [Resolve the current-repo destination](#resolve-the-current-repo-destination).
 
-## Resolve the destination
+Option 3 is conditional. Offer it **only when the CWD is inside a git
+repository**: `git rev-parse --show-toplevel` must succeed. When it fails, offer
+exactly the first two options.
+
+## Resolve the config-repo destination
 
 **Only do this when the user chose the config repo option.** Probing is wasted
-work, and misleading, if they picked `~/.agents/skills`.
+work, and misleading, if they picked `~/.agents/skills` or the current repo.
 
 Take the first candidate that passes its gate:
 
@@ -86,11 +91,39 @@ Notes on the candidates:
 `~/.agents/skills` on your own. Report which paths you checked and why each was
 rejected, then let them choose.
 
+## Resolve the current-repo destination
+
+**Only do this when the user chose the current repo option.** Probing is wasted
+work, and misleading, if they picked one of the first two options.
+
+1. `git rev-parse --show-toplevel` — if this fails, the CWD is not in a work
+   tree. The option was never valid: say so and go back to offering the first two
+   options.
+2. The destination is `<worktree root>/.claude/skills/`.
+
+Notes on this destination:
+
+- **`.claude`, not `.opencode`.** opencode reads `.opencode/skills`,
+  `.claude/skills`, and `.agents/skills` alike. `.claude/skills` keeps the repo
+  usable by Claude Code as well, which is the point of vendoring a skill into
+  someone else's project.
+- opencode discovers project skills by walking up from the CWD to the git
+  worktree root, so the root is the only placement that loads from every
+  subdirectory of the repo.
+- The file is live the moment it is written. Nothing in Nix fetches it, so there
+  is no rebuild, no `flake.lock`, and no switch to wait for.
+- If the worktree root *is* the opencode config repo — it holds
+  `opencode.json` or `opencode.jsonc` alongside a top-level `skills/` — say that
+  the config repo option reaches every machine while `.claude/skills` loads only
+  inside this repo. Install where the user asked anyway.
+
 ## Install
 
-Write to `<destination>/skills/<name>/`.
+Write to `<destination>/skills/<name>/`, or — for the current repo option — to
+`<worktree root>/.claude/skills/<name>/`.
 
-- The directory is `skills`, plural. opencode does not read `skill/`.
+- The directory is `skills`, plural, in both layouts. opencode does not read
+  `skill/`.
 - Copy the **entire skill folder**, not just `SKILL.md`. Skills ship supporting
   files — `scripts/`, `references/`, `assets/` — and copying only the manifest
   leaves them orphaned. Installing `caveman-compress` without its `scripts/*.py`
@@ -141,7 +174,29 @@ The git sequence runs here. The Nix rebuild does not.
 6. `git push`
 7. Print the remaining next steps. Do not run them.
 
+### Current repo
+
+Read the target repo's `AGENTS.md` and `CONTRIBUTING.md` if either exists, and
+follow whatever git flow they specify. **When neither file specifies one, install
+only:** write the files, leave them uncommitted, and tell the user. Do not branch,
+commit, or push on your own initiative.
+
+When a flow *is* specified, follow it under the same safety rules the config repo
+section uses:
+
+- **Ask before committing.** Never commit unprompted.
+- Stage only the new skill folder. The worktree is the user's; unrelated
+  modifications sitting in it are not yours to sweep into a commit.
+- Halt on a rebase conflict: leave the rebase in progress, report which files
+  conflicted, and suggest `git rebase --abort`.
+
+Then restart opencode. No `nix flake update`, no `nh` — nothing re-materialises
+this file, so the remaining next steps do not apply.
+
 ### Remaining next steps
+
+These are for the config repo only. `~/.agents/skills` and current-repo installs
+need nothing but an opencode restart.
 
 On a Nix machine the file is not live until the config is re-materialised:
 
@@ -166,7 +221,8 @@ Without Nix, restarting opencode is the only remaining step.
 
 ## Uninstalling
 
-Remove `<destination>/skills/<name>/`, then reverse whatever made it live:
+Remove `<destination>/skills/<name>/` — or, for a current-repo install,
+`<worktree root>/.claude/skills/<name>/` — then reverse whatever made it live:
 commit the removal and `nh` on a Nix machine, or just restart opencode for
-`~/.agents/skills`. Leaving a stale copy in both locations loads the skill
-twice.
+`~/.agents/skills` and current-repo installs. Leaving a stale copy in both
+locations loads the skill twice.
