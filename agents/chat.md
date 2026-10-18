@@ -174,6 +174,395 @@ permissions:
     resource: "go list*"
     effect: allow
 
+  # Read-only inspection: text filters, readers, and formatters.
+  - action: shell
+    resource: "echo *"
+    effect: allow
+  - action: shell
+    resource: "printf *"
+    effect: allow
+  - action: shell
+    resource: "sort *"
+    effect: allow
+  - action: shell
+    resource: "uniq *"
+    effect: allow
+  - action: shell
+    resource: "cut *"
+    effect: allow
+  - action: shell
+    resource: "tr *"
+    effect: allow
+  - action: shell
+    resource: "column *"
+    effect: allow
+  - action: shell
+    resource: "paste *"
+    effect: allow
+  - action: shell
+    resource: "join *"
+    effect: allow
+  - action: shell
+    resource: "comm *"
+    effect: allow
+  - action: shell
+    resource: "fold *"
+    effect: allow
+  - action: shell
+    resource: "nl *"
+    effect: allow
+  - action: shell
+    resource: "rev *"
+    effect: allow
+  - action: shell
+    resource: "tac *"
+    effect: allow
+  - action: shell
+    resource: "expand *"
+    effect: allow
+  - action: shell
+    resource: "unexpand *"
+    effect: allow
+  - action: shell
+    resource: "numfmt *"
+    effect: allow
+  - action: shell
+    resource: "diff *"
+    effect: allow
+  - action: shell
+    resource: "cmp *"
+    effect: allow
+  - action: shell
+    resource: "xxd *"
+    effect: allow
+  - action: shell
+    resource: "od *"
+    effect: allow
+  - action: shell
+    resource: "hexdump *"
+    effect: allow
+  - action: shell
+    resource: "strings *"
+    effect: allow
+  - action: shell
+    resource: "base64 *"
+    effect: allow
+  - action: shell
+    resource: "basenc *"
+    effect: allow
+  - action: shell
+    resource: "md5sum *"
+    effect: allow
+  - action: shell
+    resource: "sha1sum *"
+    effect: allow
+  - action: shell
+    resource: "sha256sum *"
+    effect: allow
+  - action: shell
+    resource: "sha512sum *"
+    effect: allow
+  - action: shell
+    resource: "b2sum *"
+    effect: allow
+  - action: shell
+    resource: "cksum *"
+    effect: allow
+
+  # Read-only filesystem and system inspection.
+  - action: shell
+    resource: "basename *"
+    effect: allow
+  - action: shell
+    resource: "dirname *"
+    effect: allow
+  - action: shell
+    resource: "realpath *"
+    effect: allow
+  - action: shell
+    resource: "readlink *"
+    effect: allow
+  - action: shell
+    resource: "df *"
+    effect: allow
+  - action: shell
+    resource: "du *"
+    effect: allow
+  - action: shell
+    resource: "id *"
+    effect: allow
+  - action: shell
+    resource: "whoami *"
+    effect: allow
+  - action: shell
+    resource: "groups *"
+    effect: allow
+  - action: shell
+    resource: "hostname *"
+    effect: allow
+  - action: shell
+    resource: "uname *"
+    effect: allow
+  - action: shell
+    resource: "nproc *"
+    effect: allow
+  - action: shell
+    resource: "getconf *"
+    effect: allow
+  - action: shell
+    resource: "printenv *"
+    effect: allow
+  - action: shell
+    resource: "ps *"
+    effect: allow
+  - action: shell
+    resource: "ss *"
+    effect: allow
+  - action: shell
+    resource: "lsof *"
+    effect: allow
+  - action: shell
+    resource: "free *"
+    effect: allow
+  - action: shell
+    resource: "date *"
+    effect: allow
+  - action: shell
+    resource: "sleep *"
+    effect: allow
+  - action: shell
+    resource: "seq *"
+    effect: allow
+  - action: shell
+    resource: "expr *"
+    effect: allow
+  - action: shell
+    resource: "test *"
+    effect: allow
+  - action: shell
+    resource: "[ *"
+    effect: allow
+  - action: shell
+    resource: "true *"
+    effect: allow
+  - action: shell
+    resource: "false *"
+    effect: allow
+  - action: shell
+    resource: "type *"
+    effect: allow
+
+  # Extra read-only git subcommands.
+  - action: shell
+    resource: "git grep *"
+    effect: allow
+  - action: shell
+    resource: "git show-ref *"
+    effect: allow
+  - action: shell
+    resource: "git symbolic-ref *"
+    effect: allow
+  - action: shell
+    resource: "git merge-base *"
+    effect: allow
+  - action: shell
+    resource: "git name-rev *"
+    effect: allow
+  - action: shell
+    resource: "git check-ignore *"
+    effect: allow
+  - action: shell
+    resource: "git count-objects *"
+    effect: allow
+  - action: shell
+    resource: "git worktree list *"
+    effect: allow
+  - action: shell
+    resource: "git ls-remote *"
+    effect: allow
+
+  # Read-only git commands run against another directory via -C.
+  - action: shell
+    resource: "git -C * log*"
+    effect: allow
+  - action: shell
+    resource: "git -C * diff*"
+    effect: allow
+  - action: shell
+    resource: "git -C * status*"
+    effect: allow
+  - action: shell
+    resource: "git -C * show*"
+    effect: allow
+  - action: shell
+    resource: "git -C * rev-parse*"
+    effect: allow
+  - action: shell
+    resource: "git -C * ls-files*"
+    effect: allow
+  - action: shell
+    resource: "git -C * blame*"
+    effect: allow
+  - action: shell
+    resource: "git -C * branch --list*"
+    effect: allow
+  - action: shell
+    resource: "git -C * branch -a*"
+    effect: allow
+  - action: shell
+    resource: "git -C * branch -v*"
+    effect: allow
+  - action: shell
+    resource: "git -C * tag -l*"
+    effect: allow
+
+  # Read-only GitHub CLI commands.
+  - action: shell
+    resource: "gh pr view*"
+    effect: allow
+  - action: shell
+    resource: "gh pr diff*"
+    effect: allow
+  - action: shell
+    resource: "gh pr list*"
+    effect: allow
+  - action: shell
+    resource: "gh pr checks*"
+    effect: allow
+  - action: shell
+    resource: "gh pr status*"
+    effect: allow
+  - action: shell
+    resource: "gh issue view*"
+    effect: allow
+  - action: shell
+    resource: "gh issue list*"
+    effect: allow
+  - action: shell
+    resource: "gh issue status*"
+    effect: allow
+  - action: shell
+    resource: "gh repo view*"
+    effect: allow
+  - action: shell
+    resource: "gh repo list*"
+    effect: allow
+  - action: shell
+    resource: "gh run view*"
+    effect: allow
+  - action: shell
+    resource: "gh run list*"
+    effect: allow
+  - action: shell
+    resource: "gh release view*"
+    effect: allow
+  - action: shell
+    resource: "gh release list*"
+    effect: allow
+  - action: shell
+    resource: "gh workflow view*"
+    effect: allow
+  - action: shell
+    resource: "gh workflow list*"
+    effect: allow
+  - action: shell
+    resource: "gh search *"
+    effect: allow
+  - action: shell
+    resource: "gh auth status*"
+    effect: allow
+
+  # Extra read-only nix inspection.
+  - action: shell
+    resource: "nix eval*"
+    effect: allow
+  - action: shell
+    resource: "nix describe*"
+    effect: allow
+  - action: shell
+    resource: "nix derivation show*"
+    effect: allow
+  - action: shell
+    resource: "nix registry list*"
+    effect: allow
+  - action: shell
+    resource: "nix config show*"
+    effect: allow
+  - action: shell
+    resource: "nix store path-info*"
+    effect: allow
+  - action: shell
+    resource: "nix store ls*"
+    effect: allow
+
+  # Read-only container and kubernetes inspection.
+  - action: shell
+    resource: "docker ps*"
+    effect: allow
+  - action: shell
+    resource: "docker images*"
+    effect: allow
+  - action: shell
+    resource: "docker image ls*"
+    effect: allow
+  - action: shell
+    resource: "docker inspect*"
+    effect: allow
+  - action: shell
+    resource: "docker logs*"
+    effect: allow
+  - action: shell
+    resource: "docker version*"
+    effect: allow
+  - action: shell
+    resource: "docker info*"
+    effect: allow
+  - action: shell
+    resource: "docker compose ps*"
+    effect: allow
+  - action: shell
+    resource: "docker compose config*"
+    effect: allow
+  - action: shell
+    resource: "docker compose logs*"
+    effect: allow
+  - action: shell
+    resource: "podman ps*"
+    effect: allow
+  - action: shell
+    resource: "podman images*"
+    effect: allow
+  - action: shell
+    resource: "podman inspect*"
+    effect: allow
+  - action: shell
+    resource: "podman logs*"
+    effect: allow
+  - action: shell
+    resource: "podman version*"
+    effect: allow
+  - action: shell
+    resource: "kubectl get*"
+    effect: allow
+  - action: shell
+    resource: "kubectl describe*"
+    effect: allow
+  - action: shell
+    resource: "kubectl logs*"
+    effect: allow
+  - action: shell
+    resource: "kubectl version*"
+    effect: allow
+  - action: shell
+    resource: "kubectl config view*"
+    effect: allow
+  - action: shell
+    resource: "kubectl config get-contexts*"
+    effect: allow
+  - action: shell
+    resource: "kubectl config current-context*"
+    effect: allow
+
   # ...and hard-deny things that are clearly writes or destructive.
   - action: shell
     resource: "rm *"
