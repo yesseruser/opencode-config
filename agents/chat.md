@@ -90,7 +90,7 @@ permissions:
     resource: "fd *"
     effect: allow
   - action: shell
-    resource: "ls*"
+    resource: "ls *"
     effect: allow
   - action: shell
     resource: "cat *"
